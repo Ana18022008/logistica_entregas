@@ -34,6 +34,10 @@ public class Cliente {
         this.estado = estado;
     }
 
+    public Cliente(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

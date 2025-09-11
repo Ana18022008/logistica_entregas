@@ -30,4 +30,52 @@ public class Entrega {
         this.data_entrega = data_entrega;
         this.statusEntrega = statusEntrega;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Pedido getPedido_id() {
+        return pedido_id;
+    }
+
+    public void setPedido_id(Pedido pedido_id) {
+        this.pedido_id = pedido_id;
+    }
+
+    public Motorista getMotorista_id() {
+        return motorista_id;
+    }
+
+    public void setMotorista_id(Motorista motorista_id) {
+        this.motorista_id = motorista_id;
+    }
+
+    public Date getData_saida() {
+        return data_saida;
+    }
+
+    public void setData_saida(Date data_saida) {
+        this.data_saida = data_saida;
+    }
+
+    public Date getData_entrega() {
+        return data_entrega;
+    }
+
+    public void setData_entrega(Date data_entrega) {
+        this.data_entrega = data_entrega;
+    }
+
+    public status getStatusEntrega() {
+        return statusEntrega;
+    }
+
+    public void setStatusEntrega(status statusEntrega) {
+        this.statusEntrega = statusEntrega;
+    }
 }

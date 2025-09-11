@@ -1,11 +1,12 @@
 package com.logisticaentrega.model;
-import java.util.Date;
+import com.logisticaentrega.model.Cliente;
+import java.time.LocalDate;
 
 public class Pedido {
 
     private int id;
     private Cliente cliente;
-    private Date data_pedido;
+    private LocalDate data_pedido;
     private int volumeM3;
     private int pesoKG;
     private status status_pedido;
@@ -14,7 +15,7 @@ public class Pedido {
         PENDENTE, ENTREGUE, CANCELADO
     }
 
-    public Pedido(Cliente cliente, Date data_pedido, int volumeM3, int pesoKG, status status_pedido) {
+    public Pedido(Cliente cliente, LocalDate data_pedido, int volumeM3, int pesoKG, status status_pedido) {
         this.cliente = cliente;
         this.data_pedido = data_pedido;
         this.volumeM3 = volumeM3;
@@ -22,7 +23,7 @@ public class Pedido {
         this.status_pedido = status_pedido;
     }
 
-    public Pedido(int id, Cliente cliente, Date data_pedido, int volumeM3, int pesoKG, status status_pedido) {
+    public Pedido(int id, Cliente cliente, LocalDate data_pedido, int volumeM3, int pesoKG, status status_pedido) {
         this.id = id;
         this.cliente = cliente;
         this.data_pedido = data_pedido;
@@ -47,11 +48,11 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public Date getData_pedido() {
+    public LocalDate getData_pedido() {
         return data_pedido;
     }
 
-    public void setData_pedido(Date data_pedido) {
+    public void setData_pedido(LocalDate data_pedido) {
         this.data_pedido = data_pedido;
     }
 
