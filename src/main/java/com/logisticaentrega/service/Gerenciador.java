@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import com.logisticaentrega.dao.ClienteDAO;
+import com.logisticaentrega.dao.EntregaDAO;
 import com.logisticaentrega.dao.MotoristaDAO;
 
 import com.logisticaentrega.dao.PedidoDAO;
@@ -139,17 +140,36 @@ public class Gerenciador {
 
     public void criarPedido() {
         Cliente cliente = atendente.cliente();
-        LocalDate data = atendente.data_pedido();
+        LocalDate data = atendente.data();
         int volume = atendente.volumeM3();
         int peso = atendente.peso();
         Pedido.status status = atendente.Status();
 
         Pedido pedido = new Pedido(cliente, data, volume, peso, status);
-        PedidoDAO pedidoDAO = new PedidoDAO();
+        var pedidoDAO = new PedidoDAO();
 
         try {
             pedidoDAO.criarPedido(pedido, cliente);
+            atendente.sucessoPedido();
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void gerarEntrega(){
+        Pedido pedido = atendente.pedido();
+        Motorista motorista = atendente.motorista();
+        LocalDate data_saida = atendente.data();
+        LocalDate data_entrega = atendente.data();
+        Entrega.statusE status = atendente.status();
+
+        Entrega entrega = new Entrega(pedido, motorista, data_saida, data_entrega, status);
+        var entregaDAO = new EntregaDAO();
+
+        try{
+            entregaDAO.gerarEntrega(entrega, pedido, motorista);
+            atendente.sucessoCadastro();
+        }catch(SQLException e){
             e.printStackTrace();
         }
     }

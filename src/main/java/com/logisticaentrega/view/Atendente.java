@@ -3,6 +3,12 @@ package com.logisticaentrega.view;
 import java.util.Scanner;
 
 import com.logisticaentrega.model.Cliente;
+import com.logisticaentrega.model.Pedido;
+import com.logisticaentrega.model.Entrega;
+import com.logisticaentrega.model.Entrega.statusE;
+import com.logisticaentrega.model.Motorista;
+import com.logisticaentrega.model.HistoricoEntrega;
+
 import com.logisticaentrega.model.Pedido.status;
 
 import com.logisticaentrega.service.Gerenciador;
@@ -89,8 +95,8 @@ public class Atendente {
     }
 
 
-    public LocalDate data_pedido(){
-        System.out.print("\n - Data do pedido -  \n > ");
+    public LocalDate data(){
+        System.out.print("\n - Data do pedido - ");
         System.out.print("\n ANO: \n > ");
         int year = sc.nextInt();
         System.out.print("\n MÊS: \n > ");
@@ -133,6 +139,43 @@ public class Atendente {
         }
     }
 
+    public Pedido pedido(){
+        System.out.print("\n------------ ENTREGA -------------");
+        System.out.print("\n ID do pedido: \n > ");
+        int id = sc.nextInt();
+        return new Pedido(id);
+    }
+
+    public Motorista motorista(){
+        System.out.println("\n ID do motorista: \n > ");
+        int id = sc.nextInt();
+        return new Motorista(id);
+    }
+
+    public statusE status() {
+        System.out.println("\n - Status - ");
+        System.out.println(" 1. Em Rota \n 2. Entregue \n 3. Atrasada");
+        int escolha = sc.nextInt();
+
+        switch (escolha) {
+            case 1 -> {
+                return statusE.EM_ROTA;
+            }
+
+            case 2 -> {
+                return statusE.ENTREGUE;
+            }
+
+            case 3 -> {
+                return statusE.ATRASADA;
+            }
+
+            default -> {
+                return null;
+            }
+        }
+    }
+
 public void sair(){
     System.out.println("Saindo...");
 }
@@ -141,5 +184,8 @@ public void sucessoCadastro(){
     System.out.print("\n Cadastro feito com sucesso");
 }
 
+public void sucessoPedido(){
+    System.out.print("\n Pedido cadastrado com sucesso!");
+}
 
 }

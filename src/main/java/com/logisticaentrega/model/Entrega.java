@@ -1,4 +1,5 @@
 package com.logisticaentrega.model;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Entrega {
@@ -6,15 +7,15 @@ public class Entrega {
     private int id;
     private Pedido pedido_id;
     private Motorista motorista_id;
-    private Date data_saida;
-    private Date data_entrega;
-    private status statusEntrega;
+    private LocalDate data_saida;
+    private LocalDate data_entrega;
+    private statusE statusEntrega;
 
-    public enum status{
+    public enum statusE {
         EM_ROTA, ENTREGUE, ATRASADA
     }
 
-    public Entrega(Pedido pedido_id, Motorista motorista_id, Date data_saida, Date data_entrega, status statusEntrega) {
+    public Entrega(Pedido pedido_id, Motorista motorista_id, LocalDate data_saida, LocalDate data_entrega, statusE statusEntrega) {
         this.pedido_id = pedido_id;
         this.motorista_id = motorista_id;
         this.data_saida = data_saida;
@@ -22,7 +23,7 @@ public class Entrega {
         this.statusEntrega = statusEntrega;
     }
 
-    public Entrega(int id, Pedido pedido_id, Motorista motorista_id, Date data_saida, Date data_entrega, status statusEntrega) {
+    public Entrega(int id, Pedido pedido_id, Motorista motorista_id, LocalDate data_saida, LocalDate data_entrega, statusE statusEntrega) {
         this.id = id;
         this.pedido_id = pedido_id;
         this.motorista_id = motorista_id;
@@ -55,27 +56,27 @@ public class Entrega {
         this.motorista_id = motorista_id;
     }
 
-    public Date getData_saida() {
+    public LocalDate getData_saida() {
         return data_saida;
     }
 
-    public void setData_saida(Date data_saida) {
+    public void setData_saida(LocalDate data_saida) {
         this.data_saida = data_saida;
     }
 
-    public Date getData_entrega() {
+    public LocalDate getData_entrega() {
         return data_entrega;
     }
 
-    public void setData_entrega(Date data_entrega) {
+    public void setData_entrega(LocalDate data_entrega) {
         this.data_entrega = data_entrega;
     }
 
-    public status getStatusEntrega() {
+    public statusE getStatusEntrega() {
         return statusEntrega;
     }
 
-    public void setStatusEntrega(status statusEntrega) {
+    public void setStatusEntrega(statusE statusEntrega) {
         this.statusEntrega = statusEntrega;
     }
 }

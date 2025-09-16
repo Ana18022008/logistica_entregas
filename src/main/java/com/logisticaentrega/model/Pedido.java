@@ -11,16 +11,9 @@ public class Pedido {
     private int pesoKG;
     private status status_pedido;
 
+
     public enum status{
         PENDENTE, ENTREGUE, CANCELADO
-    }
-
-    public Pedido(Cliente cliente, LocalDate data_pedido, int volumeM3, int pesoKG, status status_pedido) {
-        this.cliente = cliente;
-        this.data_pedido = data_pedido;
-        this.volumeM3 = volumeM3;
-        this.pesoKG = pesoKG;
-        this.status_pedido = status_pedido;
     }
 
     public Pedido(int id, Cliente cliente, LocalDate data_pedido, int volumeM3, int pesoKG, status status_pedido) {
@@ -31,6 +24,15 @@ public class Pedido {
         this.pesoKG = pesoKG;
         this.status_pedido = status_pedido;
     }
+
+    public Pedido(Cliente cliente, LocalDate data_pedido, int volumeM3, int pesoKG, status status_pedido) {
+        this.cliente = cliente;
+        this.data_pedido = data_pedido;
+        this.volumeM3 = volumeM3;
+        this.pesoKG = pesoKG;
+        this.status_pedido = status_pedido;
+    }
+
 
     public int getId() {
         return id;

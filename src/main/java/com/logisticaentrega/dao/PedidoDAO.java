@@ -24,7 +24,7 @@ public class PedidoDAO {
             stmt.setObject(2, pedido.getData_pedido());
             stmt.setInt(3, pedido.getVolumeM3());
             stmt.setInt(4, pedido.getPesoKG());
-            stmt.setObject(5, pedido.getStatus_pedido());
+            stmt.setString(5, pedido.getStatus_pedido().name());
 
             stmt.executeUpdate();
 
