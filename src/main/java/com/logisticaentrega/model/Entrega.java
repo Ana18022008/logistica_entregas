@@ -1,6 +1,5 @@
 package com.logisticaentrega.model;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Entrega {
 
@@ -30,6 +29,10 @@ public class Entrega {
         this.data_saida = data_saida;
         this.data_entrega = data_entrega;
         this.statusEntrega = statusEntrega;
+    }
+
+    public Entrega (int id){
+        this.id = id;
     }
 
     public int getId() {
@@ -79,4 +82,5 @@ public class Entrega {
     public void setStatusEntrega(statusE statusEntrega) {
         this.statusEntrega = statusEntrega;
     }
+
 }

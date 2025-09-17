@@ -7,7 +7,6 @@ import com.logisticaentrega.model.Pedido;
 import com.logisticaentrega.model.Entrega;
 import com.logisticaentrega.model.Entrega.statusE;
 import com.logisticaentrega.model.Motorista;
-import com.logisticaentrega.model.HistoricoEntrega;
 
 import com.logisticaentrega.model.Pedido.status;
 
@@ -95,8 +94,8 @@ public class Atendente {
     }
 
 
-    public LocalDate data(){
-        System.out.print("\n - Data do pedido - ");
+    public LocalDate data(String entidade){
+        System.out.printf("\n - Data %s - ", entidade);
         System.out.print("\n ANO: \n > ");
         int year = sc.nextInt();
         System.out.print("\n MÊS: \n > ");
@@ -176,6 +175,30 @@ public class Atendente {
         }
     }
 
+    public Entrega entrega(String entidade){
+        System.out.printf("\n----------- %s -----------", entidade);
+        System.out.print("\n ID da entrega: \n > ");
+        int id = sc.nextInt();
+        return new Entrega(id);
+    }
+
+    public String descricao(){
+        System.out.println("\n Descrição: \n > ");
+        sc.nextLine();
+        String descricao = sc.nextLine();
+        return descricao;
+    }
+
+    public String visualizar(Entrega entrega, Motorista motorista, Cliente cliente){
+            return "\n - ENTREGAS - " +
+                    "\n id : " + entrega.getId() +
+                    "\n Nome do motorista : " + motorista.getNome() +
+                    "\n ID do cliente : " + cliente.getId()+
+                    "\n Data de saída : " + entrega.getData_saida()+
+                    "\n Data de entrega : " + entrega.getData_entrega()+
+                    "\n Status : " + entrega.getStatusEntrega();
+        }
+
 public void sair(){
     System.out.println("Saindo...");
 }
@@ -188,4 +211,11 @@ public void sucessoPedido(){
     System.out.print("\n Pedido cadastrado com sucesso!");
 }
 
+public void sucessoRegistro(){
+    System.out.println("\n Histórico registrado com sucesso!");
+}
+
+public void sucessoAtualizacao(){
+    System.out.println("\n Item atualizado com sucesso!");
+}
 }

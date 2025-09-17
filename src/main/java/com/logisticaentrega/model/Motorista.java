@@ -31,6 +31,10 @@ public class Motorista {
         this.cidadeBase = cidadeBase;
     }
 
+    public Motorista (int id){
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

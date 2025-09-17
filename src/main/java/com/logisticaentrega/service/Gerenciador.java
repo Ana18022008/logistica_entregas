@@ -4,18 +4,14 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 
-import com.logisticaentrega.dao.ClienteDAO;
-import com.logisticaentrega.dao.EntregaDAO;
-import com.logisticaentrega.dao.MotoristaDAO;
+import com.logisticaentrega.dao.*;
 
-import com.logisticaentrega.dao.PedidoDAO;
 import com.logisticaentrega.view.Atendente;
 import com.logisticaentrega.model.Entrega;
 import com.logisticaentrega.model.Cliente;
 import com.logisticaentrega.model.Motorista;
 import com.logisticaentrega.model.HistoricoEntrega;
 import com.logisticaentrega.model.Pedido;
-import com.logisticaentrega.model.Pedido.status;
 
 public class Gerenciador {
 
@@ -43,19 +39,19 @@ public class Gerenciador {
             }
 
             case 4 -> {
-                //GerarEntrega
+                gerarEntrega();
             }
 
             case 5 -> {
-                //RegistrarHistórico
+                registrarHistorico();
             }
 
             case 6 -> {
-                //Atualizar status entrega
+                atualizarStatusEntrega();
             }
 
             case 7 -> {
-                //Listar todas as entregas com cliente e motorista
+                listarEntregas();
             }
 
             case 8 -> {
@@ -140,7 +136,7 @@ public class Gerenciador {
 
     public void criarPedido() {
         Cliente cliente = atendente.cliente();
-        LocalDate data = atendente.data();
+        LocalDate data = atendente.data("do pedido");
         int volume = atendente.volumeM3();
         int peso = atendente.peso();
         Pedido.status status = atendente.Status();
@@ -159,11 +155,12 @@ public class Gerenciador {
     public void gerarEntrega(){
         Pedido pedido = atendente.pedido();
         Motorista motorista = atendente.motorista();
-        LocalDate data_saida = atendente.data();
-        LocalDate data_entrega = atendente.data();
+        LocalDate data_saida = atendente.data("de saída");
+        LocalDate data_entrega = atendente.data("de entrega");
         Entrega.statusE status = atendente.status();
 
         Entrega entrega = new Entrega(pedido, motorista, data_saida, data_entrega, status);
+        listaEntregas.add(entrega);
         var entregaDAO = new EntregaDAO();
 
         try{
@@ -174,4 +171,77 @@ public class Gerenciador {
         }
     }
 
-}
+    public void registrarHistorico(){
+        Entrega entrega = atendente.entrega("HISTÓRICO");
+        LocalDate data_evento = atendente.data("do evento");
+        String descricao = atendente.descricao();
+
+        HistoricoEntrega historicoEntrega = new HistoricoEntrega(entrega, data_evento, descricao);
+        var historicoEntregaDAO = new HistoricoEntregaDAO();
+
+        try{
+            historicoEntregaDAO.registrarHistorico(historicoEntrega, entrega);
+            atendente.sucessoRegistro();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void atualizarStatusEntrega(){
+        Entrega entrega = atendente.entrega("ATUALIZAÇÃO");
+        Entrega.statusE status = atendente.status();
+
+        entrega.setStatusEntrega(status);
+        var entregaDAO = new EntregaDAO();
+
+        try{
+            entregaDAO.atualizarStatus(entrega);
+            atendente.sucessoAtualizacao();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void listarEntregas() {
+
+
+        for (Entrega entregas : listaEntregas) {
+            atendente.visualizar(entregas, entregas.getMotorista_id(), entregas.getPedido_id().getCliente());
+        }
+        var entregaDAO = new EntregaDAO();
+        try {
+            entregaDAO.listarEntrega();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+        //Listar todas as entregas com cliente e motorista
+
+
+        //- Relatório: Total de Entregas por Motorista
+
+
+        // Relatório: Clientes com Maior Volume Entregue
+
+
+        //- Relatório: Pedidos Pendentes por Estado
+
+
+        //Relatório: Entregas Atrasadas por Cidade
+
+
+        //Buscar Pedido por CPF/CNPJ do Cliente
+
+
+        //Cancelar Pedido
+
+
+        //- Excluir Entrega (com validação)
+
+
+        //Excluir Cliente (com verificação de dependência)
+
+
+        //Excluir Motorista (com verificação de dependência)
+
+    }
