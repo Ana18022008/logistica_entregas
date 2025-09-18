@@ -17,7 +17,7 @@ public class Cliente {
         this.estado = estado;
     }
 
-    public Cliente(){
+    public Cliente() {
         this.id = 0;
         this.nome = "";
         this.cpf_cnpj = "";
@@ -84,5 +84,17 @@ public class Cliente {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "- Cliente -" +
+                "\n id=" + id +
+                "\n nome=" + nome +
+                "\n cpf=" + cpf_cnpj +
+                "\n endereco=" + endereco +
+                "\n cidade=" + cidade +
+                "\n estado=" + estado +
+                '}';
     }
 }

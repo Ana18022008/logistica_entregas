@@ -10,6 +10,7 @@ public class Entrega {
     private LocalDate data_entrega;
     private statusE statusEntrega;
 
+
     public enum statusE {
         EM_ROTA, ENTREGUE, ATRASADA
     }

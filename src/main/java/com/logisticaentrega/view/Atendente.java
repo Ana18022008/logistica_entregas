@@ -189,14 +189,8 @@ public class Atendente {
         return descricao;
     }
 
-    public String visualizar(Entrega entrega, Motorista motorista, Cliente cliente){
-            return "\n - ENTREGAS - " +
-                    "\n id : " + entrega.getId() +
-                    "\n Nome do motorista : " + motorista.getNome() +
-                    "\n ID do cliente : " + cliente.getId()+
-                    "\n Data de saída : " + entrega.getData_saida()+
-                    "\n Data de entrega : " + entrega.getData_entrega()+
-                    "\n Status : " + entrega.getStatusEntrega();
+    public static void visualizar(String visualizar){
+        System.out.println(visualizar);
         }
 
 public void sair(){

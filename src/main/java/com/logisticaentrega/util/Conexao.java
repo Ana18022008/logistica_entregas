@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexao {
-    private static final String url = "jdbc:mysql://localhost:3307/logistica_entrega?useSSL=false&serverTimezone=UTC";
+    private static final String url = "jdbc:mysql://localhost:3306/logistica_entrega?useSSL=false&serverTimezone=UTC";
     private static final String user = "root";
     private static final String password = "mysqlPW";
 

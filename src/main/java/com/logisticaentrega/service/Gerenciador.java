@@ -6,12 +6,8 @@ import java.util.ArrayList;
 
 import com.logisticaentrega.dao.*;
 
+import com.logisticaentrega.model.*;
 import com.logisticaentrega.view.Atendente;
-import com.logisticaentrega.model.Entrega;
-import com.logisticaentrega.model.Cliente;
-import com.logisticaentrega.model.Motorista;
-import com.logisticaentrega.model.HistoricoEntrega;
-import com.logisticaentrega.model.Pedido;
 
 public class Gerenciador {
 
@@ -55,11 +51,11 @@ public class Gerenciador {
             }
 
             case 8 -> {
-                //- Relatório: Total de Entregas por Motorista
+                totalEntregasMotorista();
             }
 
             case 9 -> {
-                // Relatório: Clientes com Maior Volume Entregue
+                volumePorCliente();
             }
 
             case 10 -> {
@@ -95,7 +91,7 @@ public class Gerenciador {
             }
         }
     }
-        public void cadastrarCliente(){
+    public void cadastrarCliente(){
 
         String nome = atendente.nome("CLIENTE", "cliente");
         String cpf_cnpj = atendente.cpfCnpj();
@@ -202,23 +198,46 @@ public class Gerenciador {
         }
     }
 
-    public void listarEntregas() {
+     public static void listarEntregas(){
+            List<Entrega> listaEntrega = EntregaDAO.listarEntrega();
 
+            if(listaEntrega.isEmpty()){
+                System.out.println("b");
+            }
 
-        for (Entrega entregas : listaEntregas) {
-            atendente.visualizar(entregas, entregas.getMotorista_id(), entregas.getPedido_id().getCliente());
+            for(Entrega entrega : listaEntrega){
+               Atendente.visualizar("------------------");
+                System.out.println("Entrega Nº: " + entrega.getId());
+                System.out.println("\n" + entrega.getPedido_id().getCliente());
+                System.out.println("\n" + entrega.getMotorista_id());
+           }
         }
-        var entregaDAO = new EntregaDAO();
-        try {
-            entregaDAO.listarEntrega();
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+     public static void totalEntregasMotorista(){
+                List<relatorios.RelatorioMotorista> relatorioMotoristas = EntregaDAO.entregaPorMotorista();
+
+                if(relatorioMotoristas.isEmpty()){
+                    System.out.println("Lista Vazia");
+                }else{
+                    for (relatorios.RelatorioMotorista r : relatorioMotoristas){
+                        System.out.println(r);
+                    }
+                }
+            }
+
+    public static void volumePorCliente(){
+        List<relatorios.RelatorioCliente> relatorioClientes = PedidoDAO.volumePorCliente();
+
+        if(relatorioClientes.isEmpty()){
+            System.out.println("Lista Vazia");
+        }else{
+            for (relatorios.RelatorioCliente c : relatorioClientes){
+                System.out.println(c);
+            }
         }
     }
-        //Listar todas as entregas com cliente e motorista
 
-
-        //- Relatório: Total de Entregas por Motorista
+                    }
 
 
         // Relatório: Clientes com Maior Volume Entregue
@@ -244,4 +263,5 @@ public class Gerenciador {
 
         //Excluir Motorista (com verificação de dependência)
 
-    }
+
+
